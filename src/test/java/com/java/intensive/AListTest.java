@@ -22,6 +22,9 @@ public class AListTest extends TestCase {
         return new AList<>(arrayList);
     }
 
+    /**
+     * runs quick sort using customized comparator
+     */
     public void testQuickSortCompCustom() {
         AList<SortedItem> aList = AListTest.data();
         aList.add(new SortedItem("pa",18));
@@ -34,7 +37,9 @@ public class AListTest extends TestCase {
             currentSortedItem = sortedItem;
         }
     }
-
+    /**
+     * runs quick sort using customized comparator
+     */
     public void testQuickSortCompDefault() {
         AList<SortedItem> aList = AListTest.data();
         aList.add(new SortedItem("pa",18));
