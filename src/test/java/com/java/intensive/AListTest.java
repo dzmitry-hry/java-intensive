@@ -1,12 +1,13 @@
 package com.java.intensive;
 
-import junit.framework.TestCase;
-import org.junit.Assert;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class AListTest extends TestCase {
+import static org.junit.jupiter.api.Assertions.*;
+
+class AListTest {
 
     private static AList<SortedItem> data(){
         ArrayList<SortedItem> arrayList = new ArrayList<>();
@@ -21,36 +22,61 @@ public class AListTest extends TestCase {
         arrayList.add(new SortedItem("ca",8));
         return new AList<>(arrayList);
     }
-
     /**
      * runs quick sort using customized comparator
      */
-    public void testQuickSortCompCustom() {
+    @Test
+    void quickSortCustomComparator() {
+        //
+        //Given
+        //
         AList<SortedItem> aList = AListTest.data();
-        aList.add(new SortedItem("pa",18));
-        aList.quickSort(Comparator.comparingInt(SortedItem::getIndex));
+        Comparator<SortedItem> c = Comparator.comparingInt(SortedItem::getIndex);
+        //
+        //When
+        //
         SortedItem currentSortedItem = null;
+      //  aList.add(new SortedItem("pa",18));
+        aList.quickSort(c);
+        //
+        //Then
+        //
+        boolean isValid = true;
         for (SortedItem sortedItem: aList){
             if(currentSortedItem != null && sortedItem.index < currentSortedItem.index){
-                Assert.fail();
+                isValid = false;
+                break;
             }
             currentSortedItem = sortedItem;
         }
+        assertTrue(isValid);
     }
     /**
      * runs quick sort using customized comparator
      */
-    public void testQuickSortCompDefault() {
+    @Test
+    void quickSortDefaultComparator() {
+        //
+        //Given
+        //
         AList<SortedItem> aList = AListTest.data();
-        aList.add(new SortedItem("pa",18));
-        aList.quickSort();
+        //
+        //When
+        //
         SortedItem currentSortedItem = null;
+      //  aList.add(new SortedItem("pa",18));
+        aList.quickSort();
+        //
+        //Then
+        //
+        boolean isValid = true;
         for (SortedItem sortedItem: aList){
             if(currentSortedItem != null && sortedItem.hashCode() < currentSortedItem.hashCode()){
-                Assert.fail();
+                isValid = false;
+                break;
             }
             currentSortedItem = sortedItem;
         }
+        assertTrue(isValid);
     }
-
 }
