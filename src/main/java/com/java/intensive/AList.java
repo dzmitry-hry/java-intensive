@@ -4,8 +4,7 @@ import java.util.*;
 import java.util.function.Consumer;
 
 
-public class AList <T> extends AbstractList<T> implements List<T>{
-
+public class AList <T> extends AbstractList<T> {
 
     private static final int GROW_INCREMENT = 5;
     private Object[] elements;
